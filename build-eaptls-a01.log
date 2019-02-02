@@ -1,982 +1,209 @@
 https://wiki.alpinelinux.org/wiki/FreeRadius_EAP-TLS_configuration
 https://networkradius.com/doc/3.0.10/raddb/tls/tls-config_tls-common.html
 
+mount -t 9p -o trans=virtio /dev/share /root/share
 
+apt install -y bridge-utils hostapd freeradius freeradius-utils freeradius-ldap ifupdown tree iw make openvswitch-switch
 
+iw list | tee wls7.hwinfo
 
-    1  cp -f /home/ubuntu/.bashrc ~/.bashrc 
-    2  mount -t 9p -o trans=virtio /dev/share /root/share
-    3  apt install -y bridge-utils hostapd freeradius freeradius-utils freeradius-ldap ifupdown tree iw make openvswitch-switch
-    4  iw list | tee wls7.hwinfo
-    5    
-    6  mkdir -p /etc/network/interfaces.d/
-    7  mv wls7.cfg interfaces.d/
-    8  vim /etc/network/interfaces 
-    9  history
-   10  clear
-   11  cath ~/.bash_history
-   12  cat ~/.bash_history
-   13  clear
-   14  cat ~/.bash_history
-   15  clear
-   16  ls
-   17  clear
-   18  cat ~/.bash_history.bak > ~/.bash_history
-   19  history
-   20  clear
-   21  vim ~/.bash_history
-   22  exit
-   23  cd
-   24  clear
-   25  ls
-   26  cd share/
-   27  ls
-   28  cd eaptls/
-   29  ls
-   30  cd server/
-   31  ls
-   32  wget 172.1.0.191/server_build.log
-   33  ls
-   34  ll
-   35  touch 1
-   36  cd
-   37  ls
-   38  clear
-   39  ls
-   40  cd share/
-   41  ls
-   42  clear
-   43  cd eaptls/
-   44  ls
-   45  cd server/
-   46  ls
-   47  vim server_build.log 
-   48  clear
-   49  vim server_build.log 
-   50  exit
-   51  history
-   52  clear
-   53  cd
-   54  clear
-   55  ls
-   56  cd share/eaptls/
-   57  ls
-   58  clear
-   59  cd server/
-   60  ls
-   61  clear
-   62  vim /etc/network/interfaces
-   63  vim /etc/network/interfaces.d/
-   64  ls
-   65  ln -f network.d/wls7.cfg /etc/network/interfaces.d/
-   66  cp -f network.d/wls7.cfg /etc/network/interfaces.d/
-   67  clear
-   68  ls
-   69  ls network.d/
-   70  mv network.d/ interfaces.d
-   71  ls
-   72  clear
-   73  vim interfaces.d/
-   74  vim interfaces.d/host.cfg
-   75  p a
-   76  ip a
-   77  vim interfaces.d/ens6.cfg
-   78  vim interfaces.d/apd.cfg
-   79  clear
-   80  cp -f interfaces.d/* /etc/network/interfaces.d/
-   81  ls /etc/network/interfaces.d/
-   82  ip a
-   83  vim /etc/network/interfaces.d/ens6.cfg 
-   84  clear
-   85  ls
-   86  clear ; ls
-   87  ls
-   88  mkdir /root/eaptls
-   89  mkdir /root/eaptls/CertAuthority /root/eaptls/contrib /root/eaptls/hostapd /root/eaptls/interfaces.d/ /root/eaptls/radius/ /root/eaptls/bak/
-   90  clear ;ls
-   91  mkdir /root/eaptls/bak/ssl /root/eaptls/bak/hostapd /root/eaptls/bak/radius/
-   92  clear
-   93  ls
-   94  mkdir ~/eaptls/ssl
-   95  mkdir ~/eaptls/contrib/ssl
-   96  rmdir ~/eaptls/ssl
-   97  cp CertAuthority/mkcert ~/eaptls/contrib/ssl/
-   98  cp CertAuthority/openssl.cnf ~/eaptls/contrib/ssl/
-   99  vim ~/eaptls/contrib/ssl/
-  100  clear
-  101  ls
-  102  clear; ls
-  103  chmod +x ~/eaptls/contrib/ssl/mkcert 
-  104  mv ~/eaptls/contrib/ssl/mkcert ~/eaptls/contrib/ssl/init-guided.ca
-  105  clear
-  106  ln -f ~/eaptls/contrib/ssl/init-guided.ca /etc/ssl/
-  107  cp -f /etc/ssl/openssl.cnf ~/eaptls/bak/
-  108  vim ~/eaptls/bak/openssl.cnf 
-  109  ln -f ~/eaptls/contrib/ssl/openssl.cnf /etc/ssl/openssl.cnf 
-  110  ls
-  111  clear
-  112  ls
-  113  ls old/
-  114  rmdir  old/
-  115  clear; ls
-  116  ls CertAuthority/
-  117  clear; ls
-  118  mv CertAuthority/ contrib/
-  119  mkdir ssl
-  120  clear
-  121  ln /etc/ssl/init-guided.ca /etc/ssl/openssl.cnf ssl/
-  122  clear
-  123  ls
-  124  ls ~
-  125  ls ~/eaptls/
-  126  mv ~/eaptls/CertAuthority/ ~/eaptls/contrib/
-  127  cd radius/
-  128  ls
-  129  clear
-  130  ls
-  131  ls bak/
-  132  clear
-  133  ls bak/
-  134  clear
-  135  ls
-  136  ls contrib/
-  137  ls freeradius/
-  138  ln -s /etc/freeradius /root/eaptls/radius/
-  139  ls /root/eaptls/radius/
-  140  mkdir ~/eaptls/bak/radius/freeradius
-  141  cp /etc/freeradius/3.0/clients.conf /root/eaptls/bak/radius/freeradius/
-  142  cp /etc/freeradius/3.0/users /root/eaptls/bak/radius/freeradius/
-  143  ls /etc/freeradius/3.0/certs/
-  144  vim /etc/freeradius/3.0/certs/
-  145  find /etc/ -name "eap.conf"
-  146  find /etc/ -name "*eap*"
-  147  clear
-  148  ls
-  149  ls freeradius/
-  150  clear
-  151  ls
-  152  vim .
-  153  ls
-  154  vim freeradius/clients.conf 
-  155  vim ~/eaptls/radius/freeradius/3.0/clients.conf 
-  156  ls
-  157  ls freeradius/
-  158  ls contrib/
-  159  vim ~/eaptls/radius/freeradius/3.0/users 
-  160  vim /etc/freeradius/3.0/users 
-  161  vim /etc/freeradius/3.0/
-  162  apt-cache search radius | grep tls
-  163  apt-cache search radius | grep -i tls
-  164  apt-cache search radius
-  165  apt-cache search radius | grep -i mod
-  166  ckear
-  167  clear
-  168  l
-  169  clear; ls
-  170  ls contrib/
-  171  vim /etc/freeradius/3.0/users 
-  172  clear
-  173  ls contrib/
-  174  vim contrib/eap.conf 
-  175  cp contrib/eap.conf /root/eaptls/radius/freeradius/eap.conf
-  176  ln -f /root/eaptls/radius/freeradius/eap.conf /etc/freeradius/
-  177  vim /etc/freeradius/eap.conf 
-  178  vim /etc/freeradius/
-  179  ln -f /root/eaptls/radius/freeradius/eap.conf /etc/freeradius/3.0/
-  180  rm /etc/freeradius/eap.conf 
-  181  clear; ls
-  182  im /etc/freeradius/
-  183  clear; ls
-  184  vim /etc/freeradius/3.0/radiusd.conf 
-  185  vim /etc/freeradius/3.0/policy.d/
-  186  clear
-  187  ls
-  188  clear; ls
-  189  ll contrib/
-  190  cd ../hostapd/
-  191  ls
-  192  ls contrib/
-  193  vim contrib/AP 
-  194  vim /etc/hostapd/
-  195  vim contrib/hostapd.conf 
-  196  find / -name "*hostapd*"
-  197  vim /var/lib/dpkg/info/hostapd.conffiles 
-  198  vim /etc/init.d/hostapd 
-  199  vim /etc/default/hostapd 
-  200  ln -f /etc/default/hostapd /root/eaptls/hostapd/etc-default-hostapd
-  201  vim /etc/default/hostapd 
-  202  vim /etc/systemd/system/hostapd.service 
-  203  file /etc/systemd/system/hostapd.service 
-  204  vim /usr/share/doc/hostapd/examples/
-  205  cp /usr/share/doc/hostapd/examples/hostapd.conf.gz /etc/hostapd/hostapd.conf
-  206  ln -f /etc/hostapd/hostapd.conf /root/eaptls/hostapd/etc-hostapd-hostapd.conf
-  207  vim /etc/hostapd/hostapd.conf 
-  208  rm /root/eaptls/hostapd/etc-hostapd-hostapd.conf 
-  209  vim /usr/share/doc/hostapd/examples/hostapd.conf.gz 
-  210  cp /usr/share/doc/hostapd/examples/hostapd.conf.gz /tmp/
-  211  cd /tmp/
-  212  cp /usr/share/doc/hostapd/examples/hostapd.conf.gz .
-  213  ls
-  214  tar xvf hostapd.conf.gz
-  215  cat hostapd.conf.gz 
-  216  clear
-  217  vim hostapd.conf.gz 
-  218  file hostapd.conf.gz 
-  219  gzip -x ./hostapd.conf.gz
-  220  gzip --help
-  221  gzip -d ./hostapd.conf.gz
-  222  ls
-  223  mv hostapd.conf /etc/hostapd/
-  224  cd
-  225  clear
-  226  vim /root/share/eaptls/server/hostapd/hostapd/hostapd.conf 
-  227  vim /etc/hostapd/hostapd.conf 
-  228  ln -f /etc/hostapd/hostapd.conf /root/eaptls/hostapd/etc-hostapd-hostapd.conf
-  229  vim /etc/hostapd/hostapd.conf 
-  230  clear
-  231  ls share/eaptls/server/hostapd/contrib/
-  232  vim share/eaptls/server/hostapd/contrib/dot-config-hostapd 
-  233  vim share/eaptls/server/hostapd/contrib/AP 
-  234  clear
-  235  cd /etc/ssl/
-  236  ls
-  237  vim openssl.cnf 
-  238  vim init-guided.ca 
-  239  ln -f /etc/ssl/openssl.cnf /root/eaptls/CertAuthority/
-  240  vim init-guided.ca 
-  241  ls
-  242  ln init-guided.ca ~/eaptls/CertAuthority/
-  243  cd ~/eaptls/CertAuthority/
-  244  ls
-  245  mv init-guided.ca init-ca
-  246  mv issue-cert.sh issue-cert
-  247  chmod +x issue-cert 
-  248  clear; ls
-  249  vim init-ca 
-  250  ls BrainCraft.io/
-  251  cp BrainCraft.io/ .bak_BrainCraft.io
-  252  cp BrainCraft.io/ .bak_BrainCraft.io -r -f
-  253  clear; ls
-  254  vim init-ca 
-  255  clear; ./init-ca 
-  256  clear
-  257  vim init-ca 
-  258  clear; ./init-ca 
-  259  vim init-ca 
-  260  clear; ./init-ca 
-  261  vim openssl.cnf 
-  262  vim init-ca 
-  263  clear; ./init-ca 
-  264  clear
-  265  vim init-ca 
-  266  clear; ./init-ca 
-  267  vim init-ca 
-  268  clear; ./init-ca 
-  269  vim init-ca 
-  270  clear; ./init-ca 
-  271  vim init-ca 
-  272  clear; ./init-ca 
-  273  vim init-ca 
-  274  clear; ./init-ca 
-  275  vim init-ca 
-  276  clear; ./init-ca 
-  277  clear
-  278  ls
-  279  ./issue-cert 
-  280  vim ./issue-cert; ./issue-cert 
-  281  vim ./issue-cert; clear ./issue-cert 
-  282  vim ./issue-cert; clear; ./issue-cert 
-  283  rm *.pem
-  284  ls
-  285  vim openssl.cnf 
-  286  vim ./issue-cert; clear; ./issue-cert 
-  287  vim /root/eaptls/CertAuthority/openssl.cnf 
-  288  vim ./issue-cert; clear; ./issue-cert 
-  289  vim /root/eaptls/CertAuthority/openssl.cnf 
-  290  clear; ./issue-cert 
-  291  file /root/eaptls/CertAuthority/BrainCraft.io/issuer/BrainCraft.io_CertAuthority_PubCertificate.pem 
-  292  vim /root/eaptls/CertAuthority/openssl.cnf 
-  293  clear
-  294  clear; ./issue-cert 
-  295  vim /root/eaptls/CertAuthority/openssl.cnf 
-  296  ls /root/eaptls/
-  297  clear; ./issue-cert 
-  298  ls
-  299  rm *.pem
-  300  clear; ls
-  301  clear; ./issue-cert 
-  302  mkdir /root/eaptls/CertAuthority/BrainCraft.io/client_certs
-  303  vim issue-cert 
-  304  vim init-ca 
-  305  vim openssl.cnf 
-  306  clear
-  307  ls
-  308  rm *.pem
-  309  clear
-  310  clear; ./issue-cert 
-  311  ls /root/eaptls/CertAuthority/BrainCraft.io/
-  312  cp /root/eaptls/CertAuthority/BrainCraft.io/index.txt /root/eaptls/CertAuthority/BrainCraft.io/index.txt.attr
-  313  clear; ./issue-cert 
-  314  vim openssl.cnf 
-  315  clear; ./issue-cert 
-  316  vim openssl.cnf 
-  317  vim init-ca 
-  318  mv /root/eaptls/CertAuthority/BrainCraft.io/index.txt.attr /root/eaptls/CertAuthority/BrainCraft.io/index.attr
-  319  rm /root/eaptls/CertAuthority/BrainCraft.io/*.txt*
-  320  ls /root/eaptls/CertAuthority/BrainCraft.io/
-  321  clear
-  322  ls
-  323  ls BrainCraft.io/issued_certificates/
-  324  vim issue-cert 
-  325  mkdir provisioned_files
-  326  vim init-ca 
-  327  mv provisioned_files/ BrainCraft.io/provisioned_clients
-  328  clear
-  329  ls
-  330  rm *.p*
-  331  ls
-  332  clear; ls
-  333  vim issue-cert 
-  334  ls BrainCraft.io/
-  335  ls BrainCraft.io/provisioned_clients/
-  336  clear
-  337  ./init-ca 
-  338  clear; ./issue-cert 
-  339  vim init-ca 
-  340  vim openssl.cnf 
-  341  clear; ./init-ca 
-  342  clear; ./issue-cert 
-  343  vim issue-cert 
-  344  clear
-  345  clear; ./issue-cert 
-  346  vim issue-cert 
-  347  clear; ./issue-cert 
-  348  cat BrainCraft.io/index.attr 
-  349  clear
-  350  clear; ./issue-cert 
-  351  clear
-  352  clear; ./issue-cert 
-  353  clear
-  354  cd ../radius/
-  355  ls
-  356  vim freeradius/3.0/eap.conf 
-  357  clear
-  358  cd
-  359  clear
-  360  freeradius -CX
-  361  freeradius -X
-  362  killall freeradius
-  363  freeradius -X
-  364  clear
-  365  vim /etc/hostapd/hostapd.conf 
-  366  ip a
-  367  ifup wls7
-  368  vim /etc/hostapd/hostapd.conf 
-  369  cd
-  370  clear
-  371  ls
-  372  mkdir eaptls/CertAuthority/
-  373  mkdir eaptls/CertAuthority/issuer
-  374  mkdir eaptls/CertAuthority/issuer/private
-  375  mkdir -p eaptls/BrainCraft.io/CertAuthority/issuer/private
-  376  mkdir -p eaptls/CertAuthority/BrainCraft.io/issuer/private
-  377  mkdir -p eaptls/CertAuthority/BrainCraft.io/issuer/client_certs
-  378  mkdir -p eaptls/CertAuthority/BrainCraft.io/client_certs
-  379  rmdir eaptls/CertAuthority/BrainCraft.io/issuer/client_certs
-  380  rmdir eaptls/BrainCraft.io/ -f
-  381  rmdir eaptls/BrainCraft.io/ 
-  382  rm eaptls/BrainCraft.io/ -rf
-  383  clear; ls
-  384  tree eaptls/CertAuthority/
-  385  rm -rf eaptls/CertAuthority/issuer/; tree ./eaptls/CertAuthority/
-  386  clear; rm -rf eaptls/CertAuthority/issuer/; tree ./eaptls/CertAuthority/
-  387  mkdir eaptls/CertAuthority/issued_certificates
-  388  tree ./eaptls/CertAuthority/
-  389  clear; tree ./eaptls/CertAuthority/
-  390  mv eaptls/CertAuthority/issued_certificates/ eaptls/CertAuthority/BrainCraft.io/
-  391  clear; tree ./eaptls/CertAuthority/
-  392  mkdir eaptls/CertAuthority/BrainCraft.io/crl
-  393  mkdir eaptls/CertAuthority/BrainCraft.io/serial
-  394  clear; tree ./eaptls/CertAuthority/
-  395  mkdir eaptls/CertAuthority/.bak
-  396  rm eaptls/CertAuthority/BrainCraft.io/serial/
-  397  rmdir eaptls/CertAuthority/BrainCraft.io/serial/ 
-  398  clear; tree ./eaptls/CertAuthority/
-  399  clear; watch tree ./eaptls/CertAuthority/
-  400  watch --help
-  401  clear; watch -ctx tree ./eaptls/CertAuthority/
-  402  clear; watch -ct tree ./eaptls/CertAuthority/
-  403  clear; watch -c tree ./eaptls/CertAuthority/
-  404  clear; watch -cx /bin/bash -c 'tree ./eaptls/CertAuthority/'
-  405  cd
-  406  clear
-  407  vim /etc/ssl/init-guided.ca 
-  408  vim eaptls/CertAuthority/openssl.cnf 
-  409  vim eaptls/CertAuthority/init-ca 
-  410  vim eaptls/CertAuthority/issue-cert 
-  411  clear
-  412  cd eaptls/CertAuthority/
-  413  ls
-  414  mkdir signing_requests
-  415  im init-ca 
-  416  vim init-ca 
-  417  vim openssl.cnf 
-  418  vim issue-cert 
-  419  rm -rf BrainCraft.io/provisioned_clients/radius.braincraft.io/
-  420  vim openssl.cnf 
-  421  vim issue-cert 
-  422  clear
-  423  ls
-  424  cd BrainCraft.io/provisioned_clients/radius.braincraft.io/
-  425  ls
-  426  clear; ls
-  427  chmod 600 *
-  428  ll
-  429  clear; ls
-  430  clear
-  431  ln *.pem /etc/freeradius/3.0/certs/
-  432  cd ..
-  433  ls
-  434  cd ..
-  435  ls
-  436  ln issuer/BrainCraft.io_CertAuthority_PubCertificate.pem /etc/freeradius/3.0/certs/
-  437  cd
-  438  clear
-  439  ls
-  440  vim share/eaptls/server/server_build.log 
-  441  clear
-  442  hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  443  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  444  ifdown wls7
-  445  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  446  ip a
-  447  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  448  vim share/eaptls/server/server_build.log 
-  449  brctl addbr apd
-  450  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  451  ip a
-  452  ip link set apd down
-  453  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  454  vim /etc/network/interfaces.d/
-  455  ifup apd
-  456  ifdown apd
-  457  ifup apd
-  458  cd /etc/freeradius/3.0/certs/
-  459  ls
-  460  clear
-  461  ls
-  462  rm *.pem
-  463  clear; ls
-  464  chmod 600 *.pem
-  465  clear; ls
-  466  cd
-  467  clear
-  468  radius -X
-  469  freeradius -X
-  470  clear
-  471  cd eaptls/hostapd/
-  472  ls
-  473  vim etc-hostapd-hostapd.conf 
-  474  cd ../radius/freeradius
-  475  ls
-  476  cd 3.0/
-  477  ls
-  478  mv eap.conf eap.conf.wip
-  479  mv users users.wip
-  480  cp /root/share/eaptls/server/radius/freeradius/eap.conf .
-  481  cp /root/share/eaptls/server/radius/freeradius/users .
-  482  vim eap.conf
-  483  clear
-  484  freeradius -X
-  485  ls
-  486  mkdir /usr/share/ca-certificates/extra
-  487  cp /root/eaptls/CertAuthority/BrainCraft.io/issuer/BrainCraft.io_CertAuthority_PubCertificate.pem /usr/share/ca-certificates/
-  488  mv /usr/share/ca-certificates/BrainCraft.io_CertAuthority_PubCertificate.pem /usr/share/ca-certificates/extra/BrainCraft.io_CertAuthority_PubCertificate.crt
-  489  dpkg-reconfigure ca-certificates 
-  490  freeradius -X
-  491  clear
-  492  cat * | grep authority
-  493  ls
-  494  cat *.conf | grep auth
-  495  cat *.conf | grep autho
-  496  clear
-  497  ls
-  498  vim eap.conf
-  499  chmod 600 certs/*.pem
-  500  freeradius -X
-  501  clear
-  502  vim /root/eaptls/CertAuthority/openssl.cnf 
-  503  freeradius -X
-  504  cd
-  505  clear
-  506  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  507  ip a 
-  508  ip link set apd down
-  509  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  510  vim /etc/hostapd/hostapd.conf 
-  511  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  512  vim /etc/hostapd/hostapd.conf 
-  513  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  514  vim /etc/hostapd/hostapd.conf 
-  515  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  516  vim /etc/hostapd/hostapd.conf 
-  517  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  518  ip a
-  519  ip link set apd up
-  520  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  521  ip a
-  522  vim /etc/freeradius/3.0/eap.conf 
-  523  vim /etc/freeradius/3.0/
-  524  cat /etc/freeradius/3.0/* | grep "127.0.0.1"
-  525  cat /etc/freeradius/3.0/* | grep "port = 18120"
-  526  clear
-  527  vim /etc/hostapd/hostapd.conf 
-  528  vim /etc/hosts
-  529  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  530  vim /etc/hosts
-  531  vim /etc/hostapd/hostapd.conf 
-  532  vim /etc/hosts
-  533  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  534  ip a
-  535  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  536  vim /etc/hostapd/hostapd.conf 
-  537  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  538  ip link set wlp7 up
-  539  ip a
-  540  ip link set wls7 up
-  541  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  542  ls
-  543  cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.wip
-  544  share
-  545  cp share/eaptls/server/hostapd/hostapd/hostapd.conf /etc/hostapd/
-  546  vim /etc/hostapd/hostapd.conf 
-  547  ls
-  548  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  549  ls /etc/freeradius/3.0/certs/
-  550  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  551  cd
-  552  clear
-  553  radius -CX
-  554  freeradius -CX
-  555  freeradius -X
-  556  killall freeradius
-  557  freeradius -X
-  558  cd
-  559  clear
-  560  vim /etc/hostapd/hostapd.conf
-  561  ip a
-  562  vim /etc/hostapd/hostapd.conf
-  563  clear
-  564  vim /etc/hostapd/hostapd.conf
-  565  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  566  vim /etc/hostapd/hostapd.conf
-  567  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  568  vim /etc/hostapd/hostapd.conf
-  569  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  570  vim /etc/hostapd/hostapd.conf
-  571  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  572  killall hostapd
-  573  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  574  cd
-  575  clear
-  576  cd eaptls/
-  577  ls
-  578  tree CertAuthority/BrainCraft.io/
-  579  tree CertAuthority
-  580  clear; tree CertAuthority
-  581  cp CertAuthority/BrainCraft.io/index.attr CertAuthority/BrainCraft.io/index.attr.attr
-  582  tree CertAuthority/BrainCraft.io/
-  583  clear; tree CertAuthority/BrainCraft.io/
-  584  cp CertAuthority/BrainCraft.io/index.attr CertAuthority/BrainCraft.io/index
-  585  cp CertAuthority/BrainCraft.io/index.attr CertAuthority/BrainCraft.io/index.attr.attr
-  586  clear; tree CertAuthority/BrainCraft.io/
-  587  cp CertAuthority/BrainCraft.io/index.attr CertAuthority/BrainCraft.io/index.attr.attr
-  588  cp -f CertAuthority/BrainCraft.io/index.attr CertAuthority/BrainCraft.io/index
-  589  cp -f CertAuthority/BrainCraft.io/index.attr CertAuthority/BrainCraft.io/index.attr.attr
-  590  cat CertAuthority/BrainCraft.io/index*
-  591  clear
-  592  clear; tree CertAuthority/BrainCraft.io/
-  593  cat CertAuthority/BrainCraft.io/index*
-  594  cat CertAuthority/BrainCraft.io/index
-  595  cat CertAuthority/BrainCraft.io/index.attr
-  596  cat CertAuthority/BrainCraft.io/index.attr.attr
-  597  clear; tree CertAuthority/BrainCraft.io/
-  598  cd
-  599  clear
-  600  killall hostapd
-  601  clear
-  602  killall freeradius
-  603  clear
-  604  clear; freeradius -X
-  605  cd
-  606  clear
-  607  vim /root/eaptls/radius/freeradius/eap 
-  608  cd
-  609  clear
-  610  vim /etc/freeradius/eap 
-  611  chmod 660 /root/eaptls/CertAuthority/BrainCraft.io/provisioned_clients/radius.braincraft.io/*
-  612  chmod 666 /root/eaptls/CertAuthority/BrainCraft.io/provisioned_clients/radius.braincraft.io/*
-  613  chmod 777 /root/eaptls/CertAuthority/BrainCraft.io/provisioned_clients/radius.braincraft.io/*
-  614  rm /etc/freeradius/eap 
-  615  vim /etc/freeradius/3.0/sites-available/tls 
-  616  exit
-  617  cd
-  618  clear
-  619  history | grep hostapd
-  620  vim /etc/hostapd/hostapd.conf ; clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  621  cd /root/eaptls/CertAuthority/
-  622  clear
-  623  vim openssl.cnf 
-  624  cd /etc/freeradius/3.0/certs/
-  625  ls
-  626  vim ca.cnf 
-  627  vim server.cnf 
-  628  cler
-  629  clear
-  630  vim ../mods-enabled/eap 
-  631  ln ../mods-enabled/eap /root/eaptls/radius/freeradius/
-  632  vim ../mods-enabled/eap 
-  633  cd ../mods-enabled/
-  634  cd
-  635  clear; ip a
-  636  ping google.com
-  637  clear
-  638  find / -name "*passwords.mk*"
-  639  clear
-  640  exit
-  641  cd
-  642  clea
-  643  clear
-  644  cd eaptls/CertAuthority/
-  645  clear
-  646  ls
-  647  tree BrainCraft.io/
-  648  mv ubuntu_client01.tar.xz /root/share/eaptls/
-  649  cd
-  650  cp /root/eaptls/CertAuthority/BrainCraft.io/issuer/BrainCraft.io_CertAuthority_PubCertificate.pem /root/share/eaptls/
-  651  chmod 777 /root/share/eaptls/BrainCraft.io_CertAuthority_PubCertificate.pem 
-  652  clear
-  653  ls
-  654  cd eaptls/CertAuthority/BrainCraft.io/issuer/
-  655  ln BrainCraft.io_CertAuthority_PubCertificate.pem /etc/freeradius/3.0/certs/BrainCraft.io_CertAuthority_PubCertificate.pem -f
-  656  cd ../provisioned_clients/radius.braincraft.io/
-  657  ln -f radius.braincraft.io_PrivateKey.pem /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem 
-  658  ln -f radius.braincraft.io_Certificate.pem /etc/freeradius/3.0/certs/radius.braincraft.io_Certificate.pem 
-  659  cd
-  660  cd /etc/freeradius/3.0/
-  661  vim users 
-  662  clear
-  663  cd
-  664  cd eaptls/
-  665  ls
-  666  cd CertAuthority/
-  667  ls
-  668  clear
-  669  vim issue-cert 
-  670  clear
-  671  ./init-ca 
-  672  clear; ./issue-cert 
-  673  /bin/bash -x ./init-ca 
-  674  clear; ./issue-cert 
-  675  vim openssl.cnf 
-  676  /bin/bash -x ./init-ca 
-  677  clear; /bin/bash -x ./issue-cert 
-  678  vim openssl.cnf 
-  679  clear; /bin/bash -x ./issue-cert 
-  680  vim issue-cert 
-  681  clear; /bin/bash -x ./issue-cert 
-  682  vim issue-cert 
-  683  clear; /bin/bash -x ./issue-cert 
-  684  cd BrainCraft.io/provisioned_clients/radius
-  685  cd BrainCraft.io/provisioned_clients/radius.braincraft.io/
-  686  rm -rf ../radiuspwd/
-  687  ls
-  688  ln -f BrainCraft.io_CertAuthority_PubCertificate.pem /etc/freeradius/3.0/certs/BrainCraft.io_CertAuthority_PubCertificate.pem
-  689  ln -f radius.braincraft.io_Certificate.pem /etc/freeradius/3.0/certs/radius.braincraft.io_Certificate.pem 
-  690  ln -f radius.braincraft.io_PrivateKey.pem /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem 
-  691  cd ../ubuntu_client01/
-  692  cp ubuntu_client01-bundle.tar.xz /root/share/eaptls/
-  693  cd
-  694  cd eaptls/CertAuthority/
-  695  clear
-  696  ls
-  697  ./init-ca 
-  698  ./issue-cert 
-  699  vim issue-cert 
-  700  ./issue-cert 
-  701  cp BrainCraft.io/issuer/BrainCraft.io_CertAuthority_PubCertificate.pem /usr/share/ca-certificates/extra/BrainCraft.io_CertAuthority_PubCertificate.crt -f
-  702  dpkg-reconfigure ca-certificates 
-  703  cd BrainCraft.io/provisioned_clients/radius.braincraft.io/
-  704  ln -f BrainCraft.io_CertAuthority_PubCertificate.pem /etc/freeradius/3.0/certs/BrainCraft.io_CertAuthority_PubCertificate.pem 
-  705  ln -f radius.braincraft.io_Certificate.pem /etc/freeradius/3.0/certs/radius.braincraft.io_Certificate.pem 
-  706  ln -f radius.braincraft.io_PrivateKey.pem /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem 
-  707  cd ../ubuntu/
-  708  ls
-  709  cp ubuntu-bundle.tar.xz /root/share/eaptls/
-  710  chmod 777 /root/share/eaptls/ -R
-  711  cd ../../
-  712  cd ..
-  713  clear
-  714  vim init-ca 
-  715  vim issue-cert 
-  716  clear
-  717  tree BrainCraft.io/
-  718  cd BrainCraft.io/provisioned_clients/radius.braincraft.io/
-  719  ls
-  720  chmod 600 *
-  721  clear
-  722  cd
-  723  clear
-  724  ls
-  725  mv Makefile Makefile.sh
-  726  clear
-  727  vim Makefile.sh 
-  728  clear
-  729  ls
-  730  cd eaptls/
-  731  ls
-  732  cd CertAuthority/
-  733  clear
-  734  ls
-  735  vim ../README
-  736  clear
-  737  vim issue-cert 
-  738  clear
-  739  history | grep "clear; hostapd"
-  740  clear
-  741  vcd
-  742  cd
-  743  clear
-  744  cd /etc/freeradius/3.0/
-  745  clear
-  746  vim mods-enabled/
-  747  cd
-  748  wget https://raw.githubusercontent.com/FreeRADIUS/freeradius-server/29add135c8d1f1f7ccc6ab6ca25af87b48575a5b/raddb/certs/Makefile
-  749  ls
-  750  clear
-  751  vim /etc/freeradius/3.0/mods-enabled/eap 
-  752  clear
-  753  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  754  killall hostapd
-  755  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  756  clear
-  757  clear; freeradius -X
-  758  chown 711 /root/eaptls/CertAuthority/BrainCraft.io/provisioned_clients/radius.braincraft.io -R
-  759  clear; freeradius -X
-  760  chown  /root/eaptls/CertAuthority/BrainCraft.io/provisioned_clients/radius.braincraft.io/* -R
-  761  clear; freeradius -X
-  762  chown 0640 /root/eaptls/CertAuthority/BrainCraft.io/provisioned_clients/radius.braincraft.io -R
-  763  chown 0640 /root/eaptls/CertAuthority/BrainCraft.io/provisioned_clients/radius.braincraft.io/* -R
-  764  clear; freeradius -X
-  765  apt update && apt upgrade -y
-  766  clear; freeradius -X
-  767  cd /etc/freeradius/3.0/certs/
-  768  ls
-  769  file /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem
-  770  clear; freeradius -X
-  771  chmod 600 /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem
-  772  clear; freeradius -X
-  773  chmod 600 /etc/freeradius/3.0/certs/*
-  774  clear; freeradius -X
-  775  chmod 0640 /etc/freeradius/3.0/certs/*
-  776  clear; freeradius -X
-  777  file /etc/freeradius/3.0/certs/radius.braincraft.io_Certificate.pem 
-  778  ll /etc/freeradius/3.0/certs/radius.braincraft.io_Certificate.pem 
-  779  chown root:root /etc/freeradius/3.0/certs/*
-  780  clear; freeradius -X
-  781  chown root:freerad /etc/freeradius/3.0/certs/*
-  782  chmod 0640 /etc/freeradius/3.0/certs/*
-  783  chmod 0600 /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem 
-  784  clear; freeradius -X
-  785  file /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem 
-  786  cp /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey2.pem
-  787  file /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey2.pem 
-  788  clear; freeradius -X
-  789  chmod 0600 /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem 
-  790  chmod g+r /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem 
-  791  clear; freeradius -X
-  792  killall freeradius
-  793  clear; freeradius -X
-  794  cd
-  795  clear
-  796  cd eaptls/CertAuthority/BrainCraft.io/provisioned_clients/ubuntu/
-  797  ls
-  798  clear
-  799  cd
-  800  clear
-  801  exit
-  802  cd
-  803  cear
-  804  clear
-  805  netstat -l
-  806  netstat -h
-  807  netstat -lnw
-  808  netstat -ln
-  809  clear
-  810  clear; netstat -ln
-  811  openssl -showcerts -connect localhost:53
-  812  openssl s_client -showcerts -connect 172.0.0.1:1812
-  813  openssl s_client -showcerts -connect 172.0.0.1:1812 -prexit
-  814  openssl s_client -showcerts -connect 172.0.0.1:18120 -prexit
-  815  openssl s_client -showcerts -connect 172.0.0.1:181 -prexit
-  816  openssl s_client -showcerts -connect 172.0.0.1:1812 -prexit
-  817  cd
-  818  clear
-  819  wget echo |     openssl s_client -servername www.example.com -connect www.example.com:443 2>/dev/null | \
-  820  clear
-  821  echo |     openssl s_client -servername www.example.com -connect www.example.com:443 2>/dev/null | \
-  822  clear
-  823  wget http://w1.fi/releases/wpa_supplicant-2.6.tar.gz 
-  824  mkdir wpa_supplicant
-  825  mv wpa_supplicant-2.6.tar.gz wpa_supplicant/
-  826  cd wpa_supplicant/
-  827  clear
-  828  ls
-  829  tar xvf wpa_supplicant-2.6.tar.gz 
-  830  clear
-  831  ls
-  832  cd wpa_supplicant-2.6/
-  833  ls
-  834  cd wpa_supplicant/
-  835  cp defconfig .config
-  836  vim .config 
-  837  clear
-  838  make eapol_test
-  839  ls
-  840  apt-get install build-tools
-  841  vim .config 
-  842  clear
-  843  apt install libssl-dev
-  844  apt install libnl-3-dev
-  845  make
-  846  clear
-  847  make
-  848  apt-get install build-dep gcc build-essential
-  849  apt-get install gcc build-essential
-  850  clear
-  851  make
-  852  apt-cache search build-
-  853  apt-get install gcc build-essential devscripts apt-rdepends packaging-dev
-  854  apt install echo |     openssl s_client -servername www.example.com -connect www.example.com:443 2>/dev/null | \
-  855  apt install libssl-dev libnl-3-dev libnl-genl-3-dev -y
-  856  make
-  857  clear
-  858  make
-  859  vim .config 
-  860  make
-  861  apt-file search /netlink/genl/genl.h
-  862  apt update
-  863  apt-file search /netlink/genl/genl.h
-  864  vim .config 
-  865  make
-  866  clear
-  867  vim .config 
-  868  clear; ls
-  869  ln eapol_test.py /usr/local/bin/eapol_test
-  870  eapol_test -h
-  871  clear
-  872  ls
-  873  clear
-  874  cd 
-  875  cd wpa_supplicant/
-  876  clear
-  877  ls
-  878  vim eapol.conf
-  879  eapol_test -c eapol.conf -a 172.0.0.1 -p 1812
-  880  apt-cache search wpaspy
-  881  cd wpa_supplicant-2.6/wpa_supplicant/
-  882  ls
-  883  apt-cache search wpaspy
-  884  eapol_test -c eapol.conf -a 172.0.0.1 -p 1812
-  885  cd ..
-  886  ls
-  887  find ./ -name wpaspy
-  888  clear
-  889  cd
-  890  clear
-  891  eapol_test -ceapol.conf -a172.0.0.1 -p1812
-  892  find / -name wpaspy
-  893  apt-cache search wpaspy
-  894  apt-cache search python-pip
-  895  apt install python-pip
-  896  pip install wpaspy
-  897  find / -name wpaspy.py
-  898  find / -name "*wpaspy*"
-  899  eapol_test -ceapol.conf -a172.0.0.1 -p1812
-  900  apt-cache search eapol
-  901  ls
-  902  cd wpa_supplicant/
-  903  mkdir tet
-  904  mv tet/ test
-  905  cd test
-  906  wget https://www.eduroam.cz/rad_eap_test/rad_eap_test-0.15.tar.bz2 
-  907  ls
-  908  tar xvf rad_eap_test-0.15.tar.bz2 
-  909  ls
-  910  ./rad_eap_test --help
-  911  vim README 
-  912  make eapol_test
-  913  cd ../wpa_supplicant-2.6/
-  914  ls
-  915  cd wpa_supplicant/
-  916  ls
-  917  make eapol_test
-  918  ls
-  919  ./eapol_test -ceapol.conf -a172.0.0.1 -p1812
-  920  rm /usr/local/bin/eapol_test 
-  921  ln eapol_test /usr/bin/
-  922  cd
-  923  ls
-  924  cd wpa_supplicant/
-  925  ls
-  926  eapol_test 
-  927  . /root/wpa_supplicant/wpa_supplicant-2.6/wpa_supplicant/eapol_test -ceapol.conf -a172.0.0.1 -p1812
-  928  ln -f /usr/local/bin/ /root/wpa_supplicant/wpa_supplicant-2.6/wpa_supplicant/eapol_test
-  929  cp -f /root/wpa_supplicant/wpa_supplicant-2.6/wpa_supplicant/eapol_test /usr/local/bin/
-  930  . /root/wpa_supplicant/wpa_supplicant-2.6/wpa_supplicant/eapol_test -ceapol.conf -a172.0.0.1 -p1812
-  931  cp -f /root/wpa_supplicant/wpa_supplicant-2.6/wpa_supplicant/eapol_test .
-  932  ls
-  933  ./eapol_test -ceapol.conf -a172.0.0.1 -p1812
-  934  clear; ./eapol_test -ceapol.conf -a172.0.0.1 -p1812
-  935  ls
-  936  clear; ./eapol_test -c eapol.conf -a172.0.0.1 -p1812
-  937  vim .
-  938  clear; ./eapol_test -c eapol.conf -a172.0.0.1 -p1812
-  939  vim .
-  940  vim eapol.conf 
-  941  clear; ./eapol_test -c eapol.conf -a172.0.0.1 -p1812
-  942  ls
-  943  clear
-  944  ls
-  945  cat eapol
-  946  cat eapol.conf 
-  947  ls
-  948  cd wpa_supplicant-2.6/
-  949  ls
-  950  cd wpa_supplicant/
-  951  clear
-  952  ls
-  953  clear
-  954  diff defconfig .config
-  955  history | grep "install"
-  956  clear; diff defconfig .config
-  957  clear
-  958  exit
-  959  cd
-  960  clear
-  961  clear; freeradius -X
-  962  clear
-  963  exit
-  964  cld
-  965  clear
-  966  netstat -l
-  967  clear
-  968  systemctl status hostapd
-  969  systemctl start hostapd
-  970  clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
-  971  exit
-  972  clear
-  973  cat /usr/bin/share 
-  974  exit
-  975  history
-  976  history | tee hostapd-1.log
+mkdir -p /etc/network/interfaces.d/
+
+mv wls7.cfg interfaces.d/
+vim /etc/network/interfaces 
+wget 172.1.0.191/server_build.log
+cp -f network.d/wls7.cfg /etc/network/interfaces.d/
+vim interfaces.d/apd.cfg
+mkdir /root/eaptls
+mkdir /root/eaptls/CertAuthority /root/eaptls/contrib /root/eaptls/hostapd /root/eaptls/interfaces.d/ /root/eaptls/radius/ /root/eaptls/bak/
+mkdir /root/eaptls/bak/ssl /root/eaptls/bak/hostapd /root/eaptls/bak/radius/
+mkdir ~/eaptls/contrib/ssl
+cp CertAuthority/mkcert ~/eaptls/contrib/ssl/
+cp CertAuthority/openssl.cnf ~/eaptls/contrib/ssl/
+vim ~/eaptls/contrib/ssl/
+clear
+ls
+clear; ls
+chmod +x ~/eaptls/contrib/ssl/mkcert 
+mv ~/eaptls/contrib/ssl/mkcert ~/eaptls/contrib/ssl/init-guided.ca
+clear
+ln -f ~/eaptls/contrib/ssl/init-guided.ca /etc/ssl/
+cp -f /etc/ssl/openssl.cnf ~/eaptls/bak/
+vim ~/eaptls/bak/openssl.cnf 
+ln -f ~/eaptls/contrib/ssl/openssl.cnf /etc/ssl/openssl.cnf 
+ls
+clear
+ls
+ls old/
+rmdir  old/
+clear; ls
+ls CertAuthority/
+clear; ls
+mv CertAuthority/ contrib/
+mkdir ssl
+clear
+ln /etc/ssl/init-guided.ca /etc/ssl/openssl.cnf ssl/
+clear
+ls
+ls ~
+ls ~/eaptls/
+mv ~/eaptls/CertAuthority/ ~/eaptls/contrib/
+cd radius/
+ls
+clear
+ls
+ls bak/
+clear
+ls bak/
+clear
+ls
+ls contrib/
+ls freeradius/
+ln -s /etc/freeradius /root/eaptls/radius/
+ls /root/eaptls/radius/
+mkdir ~/eaptls/bak/radius/freeradius
+cp /etc/freeradius/3.0/clients.conf /root/eaptls/bak/radius/freeradius/
+cp /etc/freeradius/3.0/users /root/eaptls/bak/radius/freeradius/
+ls /etc/freeradius/3.0/certs/
+vim /etc/freeradius/3.0/certs/
+find /etc/ -name "eap.conf"
+find /etc/ -name "*eap*"
+clear
+ls
+ls freeradius/
+clear
+ls
+vim .
+ls
+vim freeradius/clients.conf 
+vim ~/eaptls/radius/freeradius/3.0/clients.conf 
+ls
+ls freeradius/
+ls contrib/
+vim ~/eaptls/radius/freeradius/3.0/users 
+vim /etc/freeradius/3.0/users 
+vim /etc/freeradius/3.0/
+apt-cache search radius | grep tls
+apt-cache search radius | grep -i tls
+apt-cache search radius
+apt-cache search radius | grep -i mod
+ckear
+clear
+l
+clear; ls
+ls contrib/
+vim /etc/freeradius/3.0/users 
+clear
+ls contrib/
+vim contrib/eap.conf 
+cp contrib/eap.conf /root/eaptls/radius/freeradius/eap.conf
+ln -f /root/eaptls/radius/freeradius/eap.conf /etc/freeradius/
+vim /etc/freeradius/eap.conf 
+vim /etc/freeradius/
+ln -f /root/eaptls/radius/freeradius/eap.conf /etc/freeradius/3.0/
+rm /etc/freeradius/eap.conf 
+clear; ls
+im /etc/freeradius/
+clear; ls
+vim /etc/freeradius/3.0/radiusd.conf 
+vim /etc/freeradius/3.0/policy.d/
+clear
+ls
+clear; ls
+ll contrib/
+cd ../hostapd/
+ls
+ls contrib/
+vim contrib/AP 
+vim /etc/hostapd/
+vim contrib/hostapd.conf 
+find / -name "*hostapd*"
+vim /var/lib/dpkg/info/hostapd.conffiles 
+vim /etc/init.d/hostapd 
+vim /etc/default/hostapd 
+ln -f /etc/default/hostapd /root/eaptls/hostapd/etc-default-hostapd
+vim /etc/default/hostapd 
+vim /etc/systemd/system/hostapd.service 
+file /etc/systemd/system/hostapd.service 
+vim /usr/share/doc/hostapd/examples/
+cp /usr/share/doc/hostapd/examples/hostapd.conf.gz /etc/hostapd/hostapd.conf
+ln -f /etc/hostapd/hostapd.conf /root/eaptls/hostapd/etc-hostapd-hostapd.conf
+vim /etc/hostapd/hostapd.conf 
+rm /root/eaptls/hostapd/etc-hostapd-hostapd.conf 
+vim /usr/share/doc/hostapd/examples/hostapd.conf.gz 
+cp /usr/share/doc/hostapd/examples/hostapd.conf.gz /tmp/
+cd /tmp/
+cp /usr/share/doc/hostapd/examples/hostapd.conf.gz .
+ls
+tar xvf hostapd.conf.gz
+cat hostapd.conf.gz 
+clear
+vim hostapd.conf.gz 
+file hostapd.conf.gz 
+gzip -x ./hostapd.conf.gz
+gzip --help
+gzip -d ./hostapd.conf.gz
+ls
+mv hostapd.conf /etc/hostapd/
+cd
+clear
+vim /root/share/eaptls/server/hostapd/hostapd/hostapd.conf 
+
+ifdown wls7
+brctl addbr apd
+
+mv /usr/share/ca-certificates/BrainCraft.io_CertAuthority_PubCertificate.pem /usr/share/ca-certificates/extra/BrainCraft.io_CertAuthority_PubCertificate.crt
+dpkg-reconfigure ca-certificates 
+
+cp share/eaptls/server/hostapd/hostapd/hostapd.conf /etc/hostapd/
+
+ln ../mods-enabled/eap /root/eaptls/radius/freeradius/
+
+ln -f BrainCraft.io_CertAuthority_PubCertificate.pem /etc/freeradius/3.0/certs/BrainCraft.io_CertAuthority_PubCertificate.pem 
+ln -f radius.braincraft.io_Certificate.pem /etc/freeradius/3.0/certs/radius.braincraft.io_Certificate.pem 
+ln -f radius.braincraft.io_PrivateKey.pem /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem 
+
+mv Makefile Makefile.sh
+wget https://raw.githubusercontent.com/FreeRADIUS/freeradius-server/29add135c8d1f1f7ccc6ab6ca25af87b48575a5b/raddb/certs/Makefile
+
+vim /etc/freeradius/3.0/mods-enabled/eap 
+
+killall hostapd
+clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
+
+chown root:freerad /etc/freeradius/3.0/certs/*
+chmod 0600 /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem 
+chmod g+r /etc/freeradius/3.0/certs/radius.braincraft.io_PrivateKey.pem 
+
+killall freeradius
+clear; freeradius -X
+
+netstat -lnw
+netstat -ln
+openssl s_client -showcerts -connect 172.0.0.1:1812 -prexit
+mkdir wpa_supplicant
+cd wpa_supplicant
+wget http://w1.fi/releases/wpa_supplicant-2.6.tar.gz 
+mv wpa_supplicant-2.6.tar.gz wpa_supplicant/
+tar xvf wpa_supplicant-2.6.tar.gz 
+
+apt-get install build-tools
+apt install libnl-3-dev
+apt-get install build-dep gcc build-essential
+apt-get install gcc build-essential devscripts apt-rdepends packaging-dev
+apt install libssl-dev libnl-3-dev libnl-genl-3-dev -y
+pip install wpaspy
+
+wget https://www.eduroam.cz/rad_eap_test/rad_eap_test-0.15.tar.bz2 
+tar xvf rad_eap_test-0.15.tar.bz2 
+./rad_eap_test --help
+make eapol_test
+cp -f /root/wpa_supplicant/wpa_supplicant-2.6/wpa_supplicant/eapol_test /usr/local/bin/
+cp -f /root/wpa_supplicant/wpa_supplicant-2.6/wpa_supplicant/eapol_test .
+clear; ./eapol_test -c eapol.conf -a172.0.0.1 -p1812
+
+clear; freeradius -X
+netstat -l
+systemctl status hostapd
+systemctl start hostapd
+clear; hostapd -dd -K -t /etc/hostapd/hostapd.conf
